@@ -17,6 +17,8 @@
 
 * has_many :user
 * has_many :items
+* has_many :address
+
 
 ## items
 
@@ -25,11 +27,11 @@
 | item_id                             | string     | null: false                    |
 | user_id                             | string     | null: false                    |
 | item_name                           | text       | null: false                    |
-| description                         | references | null: false, foreign_key: true |
+| description                         | references | null: false,                   |
 
 ### Association
 
-- has_many :user
+- belongs_to :user
 - has_many :oreders
 
 ## oreders
@@ -42,8 +44,27 @@
 
 ### Association
 
-- has_many :items
+- belongs_to
 - has_many :user
+
+## Addresses
+
+| Column      | Type       | Options                        |
+|-------------|------------|--------------------------------|
+| adress_id   | string     | null: false                    |
+| user_id     | string     | null: false, foreign_key: true |
+| post_code   | string     | null: false,                   |
+| prefecture  | text       | null: false,                   |
+| city        | text       | null: false,                   |    
+| building    | string     | null: false,                   |
+| phone_number| text       | null: false,                   |
+| created_at  | string     | null: false,                   |
+| updated_at  | string     | null: false,                   |
+
+### Association
+
+* belongs_to :users
+
 
 * Ruby version
 
