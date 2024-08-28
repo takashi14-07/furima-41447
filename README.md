@@ -13,7 +13,7 @@
 
 ### Association
 
-* has_many :user
+* has_one :user
 * has_many :items
 * has_many :address
 
@@ -27,7 +27,7 @@
 
 ### Association
 
-- belongs_to :user
+- has_one :user
 - has_many :oreders
 
 ## oreders
@@ -35,21 +35,18 @@
 | Column      | Type       | Options                        |
 |-------------|------------|--------------------------------|
 | total_price | string     | null: false,                   |
+| status      | string     | null: false                    |
 
 ### Association
 
 - belongs_to
 - has_many :user
 
-## Addresses
+## Categories
 
 | Column      | Type       | Options                        |
 |-------------|------------|--------------------------------|
-| post_code   | string     | null: false,                   |
-| prefecture  | text       | null: false,                   |
-| city        | text       | null: false,                   |    
-| building    | string     | null: false,                   |
-| phone_number| text       | null: false,                   |
+| Categories_name | string     | null: false,               |
 
 ### Association
 
