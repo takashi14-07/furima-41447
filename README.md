@@ -8,17 +8,16 @@
 |--------------------|---------------------|---------------------------|
 | nick_name          | string              | null: false               |
 | email              | string              | null: false  unique: true |
-| password_digest    | string              | null: false  unique: true |
-| password_confirmation |                  | null: false               |
-|last_name           | string              | null: false               |
-| first_name         | string              | null:false                |
+| encrypted_password | string              | null: false  unique: true |
+| last_name          | string              | null: false               |
+| first_name         | string              | null: false               |
 | last_name_kana     | string              | null: false               |  
 | first_name_kana    | string              | null: false               |
 | birthday           | date                | null: false               |
 
 ### Association
 
-* has_one :user
+
 * has_many :items
 * has_many :address
 
@@ -27,8 +26,10 @@
 
 | Column                              | Type       | Options                        |
 |-------------------------------------|------------|--------------------------------|
-| item_name                           | text       | null: false                    |
-| description                         | references | null: false,                   |
+| item_name                           | string     | null: false                    |
+| description                         | text       | null: false,                   |
+| price                               | ecimal     | null: false                    |
+| stock_quantity                       |integer    | null: false                    |
 
 ### Association
 
@@ -41,21 +42,29 @@
 |-------------|------------|--------------------------------|
 | total_price | string     | null: false,                   |
 | status      | string     | null: false                    |
+| users       | references | null: false, foreign_key: true |
+| items       | references | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to
 - has_many :user
 
-## Categories
+## address
 
 | Column      | Type       | Options                        |
 |-------------|------------|--------------------------------|
-| Categories_name | string     | null: false,               |
+| user        | integer    | null: false, foreign_key: true |
+| postal_code | string     | null: false                    |
+| prefecture  | string     | null: false                    |
+| city        | string     | null: false                    |
+| address_line1 | string   | null: false                    |
+| address_line2 | string   | null: false                    |        
+| phone_number  | string   | null: false                    |
 
 ### Association
 
-* belongs_to :users
+* has_many :user
 
 
 * Ruby version
