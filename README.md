@@ -6,10 +6,15 @@
 
 | Column             | Type                | Options                   |
 |--------------------|---------------------|---------------------------|
-| name               | text                | null: false               |
+| nick_name          | string              | null: false               |
 | email              | string              | null: false  unique: true |
-| password           | string              | null: false  unique: true |
-
+| password_digest    | string              | null: false  unique: true |
+| password_confirmation |                  | null: false               |
+|last_name           | string              | null: false               |
+| first_name         | string              | null:false                |
+| last_name_kana     | string              | null: false               |  
+| first_name_kana    | string              | null: false               |
+| birthday           | date                | null: false               |
 
 ### Association
 
