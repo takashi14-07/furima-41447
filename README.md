@@ -8,7 +8,7 @@
 |--------------------|---------------------|---------------------------|
 | nick_name          | string              | null: false               |
 | email              | string              | null: false  unique: true |
-| encrypted_password | string              | null: false  unique: true |
+| encrypted_password | string              | null: false               |
 | last_name          | string              | null: false               |
 | first_name         | string              | null: false               |
 | last_name_kana     | string              | null: false               |  
@@ -28,38 +28,42 @@
 |-------------------------------------|------------|--------------------------------|
 | item_name                           | string     | null: false                    |
 | description                         | text       | null: false,                   |
-| price                               | ecimal     | null: false                    |
-| stock_quantity                       |integer    | null: false                    |
+| price                               | string     | null: false                    |
+| category                            | string     | null: false                    |
+| condition                           | string     | null: false                    |
+| shippng                             | string     | null: false                    |
+| shippng_from                        | string     | null: false                    |
+| shippng_date                        | string     | null: false                    |
 
 ### Association
 
 - has_one :user
-- has_many :oreders
+- has_many :orders
+
 
 ## oreders
 
 | Column      | Type       | Options                        |
 |-------------|------------|--------------------------------|
-| total_price | string     | null: false,                   |
-| status      | string     | null: false                    |
-| users       | references | null: false, foreign_key: true |
-| items       | references | null: false, foreign_key: true |
+| user        | references | null: false, foreign_key: true |
+| item        | references | null: false, foreign_key: true |
 
 ### Association
 
-- belongs_to
+- belongs_to :address
 - has_many :user
+- has_many :item
 
 ## address
 
 | Column      | Type       | Options                        |
 |-------------|------------|--------------------------------|
-| user        | integer    | null: false, foreign_key: true |
+| order       | integer    | null: false, foreign_key: true |
 | postal_code | string     | null: false                    |
 | prefecture  | string     | null: false                    |
 | city        | string     | null: false                    |
 | address_line1 | string   | null: false                    |
-| address_line2 | string   | null: false                    |        
+| address_line2 | string   |                                |        
 | phone_number  | string   | null: false                    |
 
 ### Association
