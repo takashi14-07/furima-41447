@@ -19,7 +19,7 @@
 
 
 * has_many :items
-* 
+* has_many :orders
 
 
 ## items
@@ -31,14 +31,15 @@
 | price                               | string     | null: false                    |
 | category_id                         | integer    | null: false                    |
 | condition_id                        | integer    | null: false                    |
-| shippng_id                          | integer    | null: false                    |
-| shippng_from_id                     | integer    | null: false                    |
-| shippng_date_id                     | integer    | null: false                    |
+| shipping_id                         | integer    | null: false                    |
+| shipping_from_id                    | integer    | null: false                    |
+| shipping_date_id                    | integer    | null: false                    |
+| user                                | string     | null: false, foreign_key: true |
 
 ### Association
 
 - has_many :user
-- has_one :orders
+- has_one :order
 
 
 ## orders
@@ -51,16 +52,16 @@
 ### Association
 
 - has_one :address
-- belongs_to :users
+- belongs_to :user
 - has_many :items
 
-## address
+## addresses
 
 | Column      | Type       | Options                        |
 |-------------|------------|--------------------------------|
 | order       | references | null: false, foreign_key: true |
 | postal_code | string     | null: false                    |
-| shippng_from_id   |  integer    | null: false             |
+| shipping_from_id   |  integer    | null: false             |
 | city        | string     | null: false                    |
 | address_line1 | string   | null: false                    |
 | address_line2 | string   |                                |        
@@ -68,8 +69,8 @@
 
 ### Association
 
-* has_many :users
-* has_one :orders
+
+* belongs_to :order
 
 * Ruby version
 
