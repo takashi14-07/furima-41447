@@ -19,7 +19,7 @@
 
 
 * has_many :items
-* has_many :address
+* 
 
 
 ## items
@@ -29,19 +29,19 @@
 | item_name                           | string     | null: false                    |
 | description                         | text       | null: false,                   |
 | price                               | string     | null: false                    |
-| category                            | string     | null: false                    |
-| condition                           | string     | null: false                    |
-| shippng                             | string     | null: false                    |
-| shippng_from                        | string     | null: false                    |
-| shippng_date                        | string     | null: false                    |
+| category_id                         | integer    | null: false                    |
+| condition_id                        | integer    | null: false                    |
+| shippng_id                          | integer    | null: false                    |
+| shippng_from_id                     | integer    | null: false                    |
+| shippng_date_id                     | integer    | null: false                    |
 
 ### Association
 
-- has_one :user
-- has_many :orders
+- has_many :user
+- has_one :orders
 
 
-## oreders
+## orders
 
 | Column      | Type       | Options                        |
 |-------------|------------|--------------------------------|
@@ -50,17 +50,17 @@
 
 ### Association
 
-- belongs_to :address
-- has_many :user
-- has_many :item
+- has_one :address
+- belongs_to :users
+- has_many :items
 
 ## address
 
 | Column      | Type       | Options                        |
 |-------------|------------|--------------------------------|
-| order       | integer    | null: false, foreign_key: true |
+| order       | references | null: false, foreign_key: true |
 | postal_code | string     | null: false                    |
-| prefecture  | string     | null: false                    |
+| shippng_from_id   |  integer    | null: false             |
 | city        | string     | null: false                    |
 | address_line1 | string   | null: false                    |
 | address_line2 | string   |                                |        
@@ -68,8 +68,8 @@
 
 ### Association
 
-* has_many :user
-
+* has_many :users
+* has_one :orders
 
 * Ruby version
 
