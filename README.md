@@ -28,17 +28,17 @@
 |-------------------------------------|------------|--------------------------------|
 | item_name                           | string     | null: false                    |
 | description                         | text       | null: false,                   |
-| price                               | string     | null: false                    |
+| price                               | integer    | null: false                    |
 | category_id                         | integer    | null: false                    |
 | condition_id                        | integer    | null: false                    |
 | shipping_id                         | integer    | null: false                    |
 | shipping_from_id                    | integer    | null: false                    |
 | shipping_date_id                    | integer    | null: false                    |
-| user                                | string     | null: false, foreign_key: true |
+| user                                | reference  | null: false, foreign_key: true |
 
 ### Association
 
-- has_many :user
+- belongs_to :user
 - has_one :order
 
 
@@ -53,7 +53,7 @@
 
 - has_one :address
 - belongs_to :user
-- has_many :items
+- belongs_to :item
 
 ## addresses
 
