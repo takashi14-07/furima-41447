@@ -34,7 +34,7 @@
 | shipping_id                         | integer    | null: false                    |
 | shipping_from_id                    | integer    | null: false                    |
 | shipping_date_id                    | integer    | null: false                    |
-| user                                | reference  | null: false, foreign_key: true |
+| user                                | references | null: false, foreign_key: true |
 
 ### Association
 
