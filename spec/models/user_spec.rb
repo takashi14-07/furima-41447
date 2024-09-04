@@ -115,19 +115,24 @@ RSpec.describe User, type: :model do
         @user.password = 'abcdefg'
         @user.password_confirmation = 'abcdefg'
         @user.valid?
-        expect(@user.errors[:password]).to include('は英数字混在にしてください')
+        expect(@user.errors.full_messages).to include('Password は英数字混在にしてください')
       end
       it 'passwordが数字のみでは登録できないこと' do
         @user.password = '123456'
         @user.password_confirmation = '123456'
         @user.valid?
-        expect(@user.errors[:password]).to include('は英数字混在にしてください')
+        expect(@user.errors.full_messages).to include('Password は英数字混在にしてください')
       end
       it 'passwordが全角文字を含むと登録できないこと' do
         @user.password = 'passwordあ'
         @user.password_confirmation = 'passwordあ'
         @user.valid?
-        expect(@user.errors[:password]).to include('は全角文字を含めることはできません')
+        expect(@user.errors.full_messages).to include('Password は英数字混在にしてください')
+      end
+      it 'emailが空だと登録できない' do
+        @user.email = ''
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Email can't be blank")
       end
     end
   end
