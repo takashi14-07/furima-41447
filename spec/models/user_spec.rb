@@ -111,6 +111,24 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include('Last name kana 全角カタカナを使用してください')
       end
+      it 'passwordが英字のみでは登録できないこと' do
+        @user.password = 'abcdefg'
+        @user.password_confirmation = 'abcdefg'
+        @user.valid?
+        expect(@user.errors[:password]).to include('は英数字混在にしてください')
+      end
+      it 'passwordが数字のみでは登録できないこと' do
+        @user.password = '123456'
+        @user.password_confirmation = '123456'
+        @user.valid?
+        expect(@user.errors[:password]).to include('は英数字混在にしてください')
+      end
+      it 'passwordが全角文字を含むと登録できないこと' do
+        @user.password = 'passwordあ'
+        @user.password_confirmation = 'passwordあ'
+        @user.valid?
+        expect(@user.errors[:password]).to include('は全角文字を含めることはできません')
+      end
     end
   end
 end
