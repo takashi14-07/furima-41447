@@ -23,10 +23,4 @@ class ItemsController < ApplicationController
     params.require(:item).permit(:image, :item_name, :description, :category_id, :condition_id, :shipping_id, :shipping_from_id,
                                  :shipping_date_id, :price).merge(user_id: current_user.id)
   end
-
-  def require_login
-    return if current_user.id == @item.user_id
-
-    redirect_to action: :index
-  end
 end
