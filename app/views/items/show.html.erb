@@ -16,16 +16,16 @@
     </div>
     <div class="item-price-box">
       <span class="item-price">
-        ¥ 999,999,999
+        ¥ <%= @item.price %>
       </span>
       <span class="item-postage">
         <%= @item.shipping.name %>
       </span>
     </div>
 
-    <%# ログインしているユーザーと出品しているユーザーが、同一人物の場合と同一人物ではない場合で、処理を分けましょう %>
+    
  <% if user_signed_in? && current_user == @item.user %>
- <%# ユーザーがログインしていて、かつそのユーザーがこのアイテムの出品者である場合 %>
+
   <%= link_to '商品の編集', edit_item_path(@item), class: 'btn btn-primary' %>
   <%= link_to '削除', item_path(@item), method: :delete, data: { confirm: '本当に削除しますか?' }, class: 'btn btn-danger' %>
 <% end %>
@@ -106,9 +106,9 @@
       後ろの商品 ＞
     </a>
   </div>
-  <%# 詳細ページで表示されている商品のカテゴリー名を表示しましょう %>
-  <a href="#" class="another-item"><%= "商品のカテゴリー名" %>をもっと見る</a>
-  <%# //詳細ページで表示されている商品のカテゴリー名を表示しましょう %>
+ 
+  <a href="#" class="another-item"><%= @item.category.name %>をもっと見る</a>
+  
 </div>
 
 <%= render "shared/footer" %>
