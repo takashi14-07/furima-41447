@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit, :destroy]
-  before_action :set_item, only: [:edit, :update]
+  before_action :set_item, only: [:edit, :update, :show]
   before_action :check_item_owner, only: [:edit, :update, :destroy]
   def index
     @items = Item.order('created_at DESC')
@@ -42,11 +42,6 @@ class ItemsController < ApplicationController
 
   def set_item
     @item = Item.find(params[:id])
-  end
-
-  def update_without_image(params)
-    params.delete(:image)
-    update(params)
   end
 
   def check_item_owner
