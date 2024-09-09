@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit, :destroy]
   before_action :set_item, only: [:edit, :update]
+  before_action :check_item_owner, only: [:edit, :update, :destroy]
   def index
     @items = Item.order('created_at DESC')
   end
@@ -26,6 +27,14 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
   end
 
+  def update
+    if @item.update(item_params)
+      redirect_to @item, notice: '商品情報が更新されました。'
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def item_params
@@ -35,5 +44,16 @@ class ItemsController < ApplicationController
 
   def set_item
     @item = Item.find(params[:id])
+  end
+
+  def update_without_image(params)
+    params.delete(:image)
+    update(params)
+  end
+
+  def check_item_owner
+    return if @item.user_id == current_user.id
+
+    redirect_to root_path, alert: '権限がありません。'
   end
 end
