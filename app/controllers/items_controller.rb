@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit, :destroy]
-  before_action :set_item, only: [:edit, :update, :show]
-  before_action :check_item_owner, only: [:edit, :update, :destroy]
+  before_action :set_item, only: [:edit, :update, :show, :destroy]
+  before_action :correct_user, only: [:edit, :update, :destroy]
   def index
     @items = Item.order('created_at DESC')
   end
@@ -33,6 +33,11 @@ class ItemsController < ApplicationController
     end
   end
 
+  def destroy
+    @item.destroy
+    redirect_to root_path
+  end
+
   private
 
   def item_params
@@ -44,9 +49,9 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
   end
 
-  def check_item_owner
-    return if @item.user_id == current_user.id
+  def correct_user
+    return if @item && @item.user == current_user
 
-    redirect_to root_path, alert: '権限がありません。'
+    redirect_to items_url, alert: '他のユーザーの商品は削除できません。'
   end
 end
