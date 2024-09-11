@@ -89,3 +89,4 @@ gem 'rubocop', require: false
 gem 'pry-rails'
 gem 'payjp'
 gem 'gon'
+gem 'gimei'
