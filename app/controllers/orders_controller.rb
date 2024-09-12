@@ -10,9 +10,7 @@ class OrdersController < ApplicationController
     end
   end
 
-  def new
-    @order_address = OrderAddress.new
-  end
+  
 
   def create
     @order_address = OrderAddress.new(order_params)
@@ -39,7 +37,7 @@ class OrdersController < ApplicationController
     params.require(:order_address).permit(:postal_code, :shipping_from_id, :city, :address_line1, :address_line2,
                                           :phone_number).merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
   end
-  
+
   def set_item
     @item = Item.find(params[:id])
   end
