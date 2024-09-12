@@ -16,4 +16,6 @@ class User < ApplicationRecord
     validates :last_name_kana, format: { with: /\A[\p{katakana}\p{blank}ー－]+\z/, message: '全角カタカナを使用してください' }
     validates :password, format: { without: /[^\x00-\x7F]/, message: 'は全角文字を含めることはできません' }
   end
+    has_many :items
+    has_many :orders
 end
