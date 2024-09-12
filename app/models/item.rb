@@ -13,6 +13,7 @@ class Item < ApplicationRecord
   validates :price, numericality: { greater_than: 0 }
   has_one_attached :image
   belongs_to :user
+  has_one :order
 
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category
